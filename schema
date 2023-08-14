@@ -1,0 +1,12 @@
+  {
+        Configuration config = DatabaseManager.createConfigurationFile( "Sales.ulj" );
+        Connection conn = DatabaseManager.createDatabase( config );
+
+        conn.schemaCreateBegin();
+
+        TableSchema table_schema = conn.createTable( "Product" );
+        table_schema.createColumn( "prod_no", Domain.INTEGER );
+        table_schema.createColumn( "prod_name", Domain.VARCHAR, 32 );
+        table_schema.createColumn( "price", Domain.NUMERIC, 9, (short)2 );
+        IndexSchema index_schema = table_schema.createPrimaryIndex( "prime_keys" );
+        index_schema.addColumn( "prod_no", IndexSchema.ASCENDING );
